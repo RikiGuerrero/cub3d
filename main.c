@@ -11,7 +11,43 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
+/*
+#include <MLX42/MLX42.h>
+#include <stdio.h>
+#include <stdlib.h>
 
+int32_t main(void)
+{
+    // Initialize MLX42
+    mlx_t* mlx = mlx_init(800, 600, "MLX42 Window", true);
+    if (!mlx)
+    {
+        fprintf(stderr, "MLX42 initialization failed\n");
+        return EXIT_FAILURE;
+    }
+
+    // Create a new image
+    mlx_image_t* img = mlx_new_image(mlx, 800, 600);
+    if (!img)
+    {
+        fprintf(stderr, "Image creation failed\n");
+        mlx_terminate(mlx);
+        return EXIT_FAILURE;
+    }
+
+    // Set the image to the window
+    mlx_image_to_window(mlx, img, 0, 0);
+
+    // Main loop
+    mlx_loop(mlx);
+
+    // Cleanup
+    mlx_delete_image(mlx, img);
+    mlx_terminate(mlx);
+
+    return EXIT_SUCCESS;
+}
+*/
 int main(int ac, char **av)
 {
 	if (ac != 2 || ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".cub", 4))

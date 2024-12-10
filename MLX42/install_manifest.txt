@@ -1,0 +1,2 @@
+/usr/local/include/MLX42/MLX42.h
+/usr/local/lib/libmlx42.a
