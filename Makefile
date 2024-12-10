@@ -4,7 +4,7 @@ NAME		= cub3D
 
 CFLAGS		= -g -Wall -Wextra -Werror
 
-INC			= -I.
+INC			= -I. -I/usr/local/include
 
 SRC			=	main.c \
 
@@ -19,11 +19,13 @@ GREEN		=\033[32;1m
 YELLOW		=\033[33;1m
 BLUE		=\033[34;1m
 
+LIBS		= -L/usr/local/lib -lmlx42 -lglfw -ldl -lm
+
 all: $(NAME)
 
 $(NAME): $(OBJ) $(LIBFT)
 	@echo "$(YELLOW)Compiling $(NAME)...$(NO_COLOR)"
-	@gcc $(CFLAGS) $(INC) $(OBJ) $(LIBFT) -o $(NAME) -lreadline > /dev/null
+	@gcc $(CFLAGS) $(INC) $(OBJ) $(LIBFT) $(LIBS) -o $(NAME) -lreadline > /dev/null
 	@echo "$(GREEN)Compilation of $(NAME) done!$(NO_COLOR)"
 
 libft/libft.a:
