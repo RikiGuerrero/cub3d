@@ -4,7 +4,11 @@ NAME		= cub3D
 
 CFLAGS		= -g -Wall -Wextra -Werror
 
-INC			= -I. -I/usr/local/include
+MLX42_DIR	= ./MLX42
+MLX42_INC	= $(MLX42_DIR)/include
+MLX42_LIB	= $(MLX42_DIR)
+
+INC			= -I. -I/usr/local/include -I$(MLX42_INC)
 
 SRC			=	main.c \
 
@@ -19,7 +23,7 @@ GREEN		=\033[32;1m
 YELLOW		=\033[33;1m
 BLUE		=\033[34;1m
 
-LIBS		= -L/usr/local/lib -lmlx42 -lglfw -ldl -lm
+LIBS		= -L/usr/local/lib -L$(MLX42_LIB) -lmlx42 -lglfw -ldl -lm
 
 all: $(NAME)
 
