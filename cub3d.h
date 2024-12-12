@@ -6,7 +6,7 @@
 /*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:52:01 by rguerrer          #+#    #+#             */
-/*   Updated: 2024/12/12 11:26:03 by rguerrer         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:32:29 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,18 @@
 # include <math.h>
 # include "libft/libft.h"
 # include "MLX42/MLX42.h"
+
+typedef struct s_cub
+{
+    
+}               t_cub;
+
+typedef struct	s_map
+{
+    char	**map;
+    int     player_x;
+    int     player_y;
+    int		map_width;
+    int		map_height;
+}				t_map;
 
