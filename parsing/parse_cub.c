@@ -49,7 +49,10 @@ char	**read_file(char *file)
 	i = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		map = ft_realloc(map, i + 1, i + 2);
+		char *cr = strchr(line, '\r');
+		if (cr)
+			memmove(cr, cr + 1, strlen(cr));
+		map = ft_realloc(map, i + 1, i + 2); // lineas para eliminar \r
 		if (!map)
 			return (NULL);
 		map[i] = line;

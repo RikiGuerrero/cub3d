@@ -65,7 +65,7 @@ int	ft_check_walls(char **map)
 		j = 0;
 		while (map[i][j] && map[i][j] == ' ')
 			j++;
-		if (map[i][j] != '1' || map[i][j + 1] != '1')
+		if (map[i][j] != '1' || map[i][ft_strlen(map[i]) - 2] != '1') // -2 para evitar el \n
 		{
 			ft_putstr_fd("Error\nMap is not surrounded by walls\n", 2);
 			return (1);
@@ -74,7 +74,7 @@ int	ft_check_walls(char **map)
 		{
 			while (map[i][j])
 			{
-				if (map[i][j] != '1' && map[i][j] != ' ')
+				if (map[i][j] != '1' && map[i][j] != ' ' && map[i][j] != '\n')
 				{
 					ft_putstr_fd("Error\nMap is not surrounded by walls\n", 2);
 					return (1);
@@ -145,8 +145,6 @@ int	ft_check_unclosed(char **map)
 
 int	ft_valid_map(char **map)
 {
-	printf("%s\n", map[0]);
-	printf("%s\n", map[1]);
 	if (ft_strange_chars(map) == 1)
 		return (1);	
 	if (ft_check_unclosed(map) == 1)
