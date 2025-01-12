@@ -10,7 +10,8 @@ MLX42_LIB	= $(MLX42_DIR)
 
 INC			= -I. -I/usr/local/include -I$(MLX42_INC)
 
-SRC			=	main.c \
+SRC			=	main.c init_struct.c parsing/check_map.c parsing/check.c parsing/parse_cub.c\
+				parsing/texture.c
 
 LIBFT		= libft/libft.a
 

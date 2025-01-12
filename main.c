@@ -50,8 +50,8 @@ int32_t main(void)
 */
 int main(int ac, char **av)
 {
-    t_map map;
-    
+	t_cub cub;
+
 	if (ac != 2 || ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".cub", 4))
 	{
 		ft_putstr_fd("Error\nInvalid arguments\n", 2);
@@ -59,10 +59,10 @@ int main(int ac, char **av)
 	}
 	else
 	{
-		if (parse_cub(&map, av[1]) == -1)
+		if (parse_cub(&cub, av[1]) == 1)
 			return (1);
 		printf("Running game\n");
-		game_loop(&map);
+		//game_loop(&map);
 		printf("Game over\n");
 	}
 	return (0);

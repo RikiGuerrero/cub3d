@@ -18,20 +18,37 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
-# include "libft/libft.h"
+# include "libft/includes/libft.h"
 # include "MLX42/MLX42.h"
-
-typedef struct s_cub
-{
-    
-}               t_cub;
 
 typedef struct	s_map
 {
-    char	**map;
-    int     player_x;
-    int     player_y;
-    int		map_width;
-    int		map_height;
+	char	**input;
+	char	**map;
 }				t_map;
 
+typedef struct s_config
+{
+	char	*no_texture;
+	char	*so_texture;
+	char	*we_texture;
+	char	*ea_texture;
+	int		floor_color[3];
+	int		ceiling_color[3];
+}				t_config;
+
+typedef struct s_cub
+{
+	t_map	map;
+	t_config	config;
+}				t_cub;
+
+// Parsing
+int		parse_cub(t_cub *cub, char *file);
+void	init_cub(t_cub *cub);
+int	ft_checks(t_cub *cub);
+char	**ft_map(char **input);
+int		ft_valid_map(char **map);
+int	ft_parse_textures(t_cub *cub);
+
+#endif
