@@ -29,8 +29,8 @@ int	ft_strange_chars(char **map)
 		while (map[i][j])
 		{
 			if (map[i][j] != ' ' && map[i][j] != '1' && map[i][j] != '0' &&
-				map[i][j] != '2' && map[i][j] != 'N' && map[i][j] != 'S' &&
-				map[i][j] != 'E' && map[i][j] != 'W' && map[i][j] != '\n')
+				map[i][j] != '\n' && map[i][j] != 'N' && map[i][j] != 'S' &&
+				map[i][j] != 'E' && map[i][j] != 'W')
 			{
 				ft_putstr_fd("Error\nStrange characters in the map\n", 2);
 				return (1);
@@ -91,8 +91,10 @@ int	ft_check_double(char **map)
 {
 	int	i;
 	int	j;
+	int count;
 
 	i = 0;
+	count = 0;
 	while (map[i])
 	{
 		j = 0;
@@ -100,13 +102,11 @@ int	ft_check_double(char **map)
 		{
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' ||
 				map[i][j] == 'W')
+				count++;
+			if (count > 1)
 			{
-				if (map[i][j + 1] == 'N' || map[i][j + 1] == 'S' ||
-					map[i][j + 1] == 'E' || map[i][j + 1] == 'W')
-				{
-					ft_putstr_fd("Error\nDouble player position\n", 2);
-					return (1);
-				}
+				ft_putstr_fd("Error\nMore than one player\n", 2);
+				return (1);
 			}
 			j++;
 		}
@@ -126,11 +126,17 @@ int	ft_check_unclosed(char **map)
 		j = 0;
 		while (map[i][j])
 		{
-			if (map[i][j] == '0' || map[i][j] == '2' || map[i][j] == 'N' ||
-				map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
+			if (map[i][j] == '0' || map[i][j] == 'W' || map[i][j] == 'N' ||
+				map[i][j] == 'S' || map[i][j] == 'E')
 			{
 				if (map[i][j + 1] == '\0' || map[i][j - 1] == '\0' ||
 					map[i + 1][j] == '\0' || map[i - 1][j] == '\0')
+				{
+					ft_putstr_fd("Error\nMap not closed\n", 2);
+					return (1);
+				}
+				else if (map[i][j + 1] == ' ' || map[i][j - 1] == ' ' ||
+					map[i + 1][j] == ' ' || map[i - 1][j] == ' ')
 				{
 					ft_putstr_fd("Error\nMap not closed\n", 2);
 					return (1);

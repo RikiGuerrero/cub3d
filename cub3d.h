@@ -46,9 +46,9 @@ typedef struct s_cub
 // Parsing
 int		parse_cub(t_cub *cub, char *file);
 void	init_cub(t_cub *cub);
-int	ft_checks(t_cub *cub);
+int		ft_checks(t_cub *cub);
 char	**ft_map(char **input);
 int		ft_valid_map(char **map);
-int	ft_parse_textures(t_cub *cub);
+int		ft_parse_textures(t_cub *cub);
 
 #endif
