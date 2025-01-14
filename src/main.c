@@ -6,48 +6,28 @@
 /*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:45:56 by rguerrer          #+#    #+#             */
-/*   Updated: 2024/12/12 11:36:37 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/14 13:10:01 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-/*
-#include <MLX42/MLX42.h>
-#include <stdio.h>
-#include <stdlib.h>
 
-int32_t main(void)
+void	ft_exit(t_cub *cub) 		// exit the game
 {
-    // Initialize MLX42
-    mlx_t* mlx = mlx_init(800, 600, "MLX42 Window", true);
-    if (!mlx)
-    {
-        fprintf(stderr, "MLX42 initialization failed\n");
-        return EXIT_FAILURE;
-    }
-
-    // Create a new image
-    mlx_image_t* img = mlx_new_image(mlx, 800, 600);
-    if (!img)
-    {
-        fprintf(stderr, "Image creation failed\n");
-        mlx_terminate(mlx);
-        return EXIT_FAILURE;
-    }
-
-    // Set the image to the window
-    mlx_image_to_window(mlx, img, 0, 0);
-
-    // Main loop
-    mlx_loop(mlx);
-
-    // Cleanup
-    mlx_delete_image(mlx, img);
-    mlx_terminate(mlx);
-
-    return EXIT_SUCCESS;
+	//int	i = 0;
+	//while (cub->map->map[i])
+	//	free(cub->map->map[i++]); // free the map line by line
+	//free(cub->map->map); // free the map
+	//free(cub->map); // free the data structure
+	free(cub->ply); // free the player structure
+	free(cub->ray); // free the ray structure
+	mlx_delete_image(cub->mlx_p, cub->img); // delete the image
+	mlx_close_window(cub->mlx_p); // close the window
+	mlx_terminate(cub->mlx_p); // terminate the mlx pointer
+	printf("Game closed\n"); // print the message
+	exit(0); // exit the game
 }
-*/
+
 int main(int ac, char **av)
 {
 	t_cub cub;
@@ -62,7 +42,7 @@ int main(int ac, char **av)
 		if (parse_cub(&cub, av[1]) == 1)
 			return (1);
 		printf("Running game\n");
-		//game_loop(&map);
+        start_the_game(&cub);
 		printf("Game over\n");
 	}
 	return (0);

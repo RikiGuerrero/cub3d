@@ -6,7 +6,7 @@
 /*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:17:38 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/14 10:45:56 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:26:14 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ void	init_map(t_map *map)
 {
 	map->map = NULL;
 	map->input = NULL;
+	map->p_x = -1;
+	map->p_y = -1;
+	map->w_map = 0;
+	map->h_map = 0;
 }
 
 void	init_config(t_config *config)
@@ -34,6 +38,7 @@ void	init_config(t_config *config)
 
 void	init_cub(t_cub *cub)
 {
-	init_map(&cub->map);
+	cub->map = ft_calloc(1, sizeof(t_map));
+	init_map(cub->map);
 	init_config(&cub->config);
 }

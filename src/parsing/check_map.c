@@ -6,7 +6,7 @@
 /*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 14:03:59 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/14 10:45:42 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:32:21 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	ft_check_walls(char **map)
 		j = 0;
 		while (map[i][j] && map[i][j] == ' ')
 			j++;
-		if (map[i][j] != '1' || map[i][ft_strlen(map[i]) - 2] != '1') // -2 para evitar el \n
+		if (map[i][j] != '1' || map[i][ft_strlen(map[i]) - 1] != '1')
 		{
 			ft_putstr_fd("Error\nMap is not surrounded by walls\n", 2);
 			return (1);

@@ -6,11 +6,41 @@
 /*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:13:19 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/14 10:45:38 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:49:43 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void ft_set_map(t_map *map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while(map->map[0][map->w_map] != '\0')
+		map->w_map++;
+	while(map->map[map->h_map] != NULL)
+		map->h_map++;
+	while (i < map->h_map)
+	{
+		j = 0;
+		while (j < map->w_map)
+		{
+			if (map->map[i][j] == 'N' || map->map[i][j] == 'S' ||
+				map->map[i][j] == 'E' || map->map[i][j] == 'W')
+			{
+				map->p_x = j;
+				map->p_y = i;
+				map->p_x++;
+				map->p_y++;
+				return ;
+			}
+			j++;
+		}
+		i++;
+	}
+}
 
 char	**ft_realloc(char **ptr, size_t old_count, size_t new_count)
 {
@@ -91,8 +121,8 @@ char	**ft_map(char **input)
 int	parse_cub(t_cub *cub, char *file)
 {
 	init_cub(cub);
-	cub->map.input = read_file(file);
-	if (!cub->map.input)
+	cub->map->input = read_file(file);
+	if (!cub->map->input)
 		return (1);
 		//return (ft_delete(cub), 1);
 	if (ft_checks(cub) == 1)

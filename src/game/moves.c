@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:25:16 by pjimenez          #+#    #+#             */
-/*   Updated: 2025/01/13 23:29:02 by pjimenez         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:21:03 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_reles(mlx_key_data_t keydata, t_mlx *mlx)
+void	ft_reles(mlx_key_data_t keydata, t_cub *mlx)
 {
 	if (keydata.key == MLX_KEY_D && (keydata.action == MLX_RELEASE))
 		mlx->ply->l_r = 0;
@@ -30,7 +30,7 @@ void	ft_reles(mlx_key_data_t keydata, t_mlx *mlx)
 
 void mlx_key(mlx_key_data_t keydata, void *ml)
 {
-	t_mlx	*mlx;
+	t_cub	*mlx;
 
 	mlx = ml;
 	if (keydata.key == MLX_KEY_ESCAPE && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
@@ -50,7 +50,7 @@ void mlx_key(mlx_key_data_t keydata, void *ml)
 	ft_reles(keydata, mlx);
 }
 
-void	rotate_player(t_mlx *mlx, int i)
+void	rotate_player(t_cub *mlx, int i)
 {
 	if (i == 1)
 	{
@@ -66,7 +66,7 @@ void	rotate_player(t_mlx *mlx, int i)
 	}
 }
 
-void	move_player(t_mlx *mlx, double move_x, double move_y)
+void	move_player(t_cub *mlx, double move_x, double move_y)
 {
 	int		map_grid_y;
 	int		map_grid_x;
@@ -77,16 +77,16 @@ void	move_player(t_mlx *mlx, double move_x, double move_y)
 	new_y = roundf(mlx->ply->plyr_y + move_y);
 	map_grid_x = (new_x / TILE_SIZE);
 	map_grid_y = (new_y / TILE_SIZE);
-	if (mlx->dt->map2d[map_grid_y][map_grid_x] != '1' && \
-	(mlx->dt->map2d[map_grid_y][mlx->ply->plyr_x / TILE_SIZE] != '1' && \
-	mlx->dt->map2d[mlx->ply->plyr_y / TILE_SIZE][map_grid_x] != '1'))
+	if (mlx->map->map[map_grid_y][map_grid_x] != '1' && \
+	(mlx->map->map[map_grid_y][mlx->ply->plyr_x / TILE_SIZE] != '1' && \
+	mlx->map->map[mlx->ply->plyr_y / TILE_SIZE][map_grid_x] != '1'))
 	{
 		mlx->ply->plyr_x = new_x;
 		mlx->ply->plyr_y = new_y;
 	}
 }
 
-void	hook(t_mlx *mlx, double move_x, double move_y)
+void	hook(t_cub *mlx, double move_x, double move_y)
 {
 	if (mlx->ply->rot == 1)
 		rotate_player(mlx, 1);

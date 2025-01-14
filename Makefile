@@ -16,13 +16,12 @@ OBJ_DIR		= obj/
 SRC_DIR		= src/
 
 SRC_FILES	= main
-PR_FILES	= check_map check parse_cub texture
+PR_FILES	= check_map check parse_cub texture init_struct
 RC_FILES	= gameLoop moves rayCasting renderWalls
 SRC_FILES 	+= $(addprefix $(RC_DIR), $(RC_FILES))
 SRC_FILES 	+= $(addprefix $(PR_DIR), $(PR_FILES))
 
 SRCS 		= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
-SRCS 		= $(addprefix $(PR_DIR), $(addsuffix .c, $(PR_FILES)))
 OBJS 		= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
 OBJF		=	.cache_exists
 
@@ -59,6 +58,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
 $(OBJF):
 			@mkdir -p $(OBJ_DIR)
 			@mkdir -p $(OBJ_DIR)$(RC_DIR)
+			@mkdir -p $(OBJ_DIR)$(PR_DIR)
 
 clean:
 	@echo "$(YELLOW)Cleaning objects...$(NO_COLOR)"

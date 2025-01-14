@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   renderWalls.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:28:04 by pjimenez          #+#    #+#             */
-/*   Updated: 2025/01/12 20:21:29 by pjimenez         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:11:14 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	my_mlx_pixel_put(t_mlx *mlx, int x, int y, int color)	// put the pixel
+void	my_mlx_pixel_put(t_cub *mlx, int x, int y, int color)	// put the pixel
 {
 	if (x < 0) // check the x position
 		return ;
@@ -34,7 +34,7 @@ float	nor_angle(float angle)	// normalize the angle
 	return (angle);
 }
 
-void	draw_floor_ceiling(t_mlx *mlx, int ray, int t_pix, int b_pix)	// draw the floor and the ceiling
+void	draw_floor_ceiling(t_cub *mlx, int ray, int t_pix, int b_pix)	// draw the floor and the ceiling
 {
 	int		i;
 
@@ -46,7 +46,7 @@ void	draw_floor_ceiling(t_mlx *mlx, int ray, int t_pix, int b_pix)	// draw the f
 		my_mlx_pixel_put(mlx, ray, i++, 0x89CFF3FF); // ceiling
 }
 
-int	get_color(t_mlx *mlx, int flag)	// get the color of the wall
+int	get_color(t_cub *mlx, int flag)	// get the color of the wall
 {
 	mlx->ray->ray_ngl = nor_angle(mlx->ray->ray_ngl); // normalize the angle
 	if (flag == 0)
@@ -65,7 +65,7 @@ int	get_color(t_mlx *mlx, int flag)	// get the color of the wall
 	}
 }
 
-void	draw_wall(t_mlx *mlx, int ray, int t_pix, int b_pix)	// draw the wall
+void	draw_wall(t_cub *mlx, int ray, int t_pix, int b_pix)	// draw the wall
 {
 	int color;
 
@@ -74,7 +74,7 @@ void	draw_wall(t_mlx *mlx, int ray, int t_pix, int b_pix)	// draw the wall
 		my_mlx_pixel_put(mlx, ray, t_pix++, color);
 }
 
-void	render_wall(t_mlx *mlx, int ray)	// render the wall
+void	render_wall(t_cub *mlx, int ray)	// render the wall
 {
 	double	wall_h;
 	double	b_pix;

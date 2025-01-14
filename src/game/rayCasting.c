@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rayCasting(mirar).c                                :+:      :+:    :+:   */
+/*   rayCasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:28:54 by pjimenez          #+#    #+#             */
-/*   Updated: 2025/01/12 19:28:59 by pjimenez         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:21:52 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	inter_check(float angle, float *inter, float *step, int is_horizon)	// check
 	return (1);
 }
 
-int	wall_hit(float x, float y, t_mlx *mlx)	// check the wall hit
+int	wall_hit(float x, float y, t_cub *mlx)	// check the wall hit
 {
 	int		x_m;
 	int		y_m;
@@ -61,15 +61,15 @@ int	wall_hit(float x, float y, t_mlx *mlx)	// check the wall hit
 		return (0);
 	x_m = floor (x / TILE_SIZE); // get the x position in the map
 	y_m = floor (y / TILE_SIZE); // get the y position in the map
-	if ((y_m >= mlx->dt->h_map || x_m >= mlx->dt->w_map))
+	if ((y_m >= mlx->map->h_map || x_m >= mlx->map->w_map))
 		return (0);
-	if (mlx->dt->map2d[y_m] && x_m <= (int)strlen(mlx->dt->map2d[y_m]))
-		if (mlx->dt->map2d[y_m][x_m] == '1')
+	if (mlx->map->map[y_m] && x_m <= (int)strlen(mlx->map->map[y_m]))
+		if (mlx->map->map[y_m][x_m] == '1')
 			return (0);
 	return (1);
 }
 
-float	get_h_inter(t_mlx *mlx, float angl)	// get the horizontal intersection
+float	get_h_inter(t_cub *mlx, float angl)	// get the horizontal intersection
 {
 	float	h_x;
 	float	h_y;
@@ -92,7 +92,7 @@ float	get_h_inter(t_mlx *mlx, float angl)	// get the horizontal intersection
 	return (sqrt(pow(h_x - mlx->ply->plyr_x, 2) + pow(h_y - mlx->ply->plyr_y, 2))); // get the distance
 }
 
-float	get_v_inter(t_mlx *mlx, float angl)	// get the vertical intersection
+float	get_v_inter(t_cub *mlx, float angl)	// get the vertical intersection
 {
 	float	v_x;
 	float	v_y;
@@ -115,7 +115,7 @@ float	get_v_inter(t_mlx *mlx, float angl)	// get the vertical intersection
 	return (sqrt(pow(v_x - mlx->ply->plyr_x, 2) + pow(v_y - mlx->ply->plyr_y, 2))); // get the distance
 }
 
-void	cast_rays(t_mlx *mlx)	// cast the rays
+void	cast_rays(t_cub *mlx)	// cast the rays
 {
 	double	h_inter;
 	double	v_inter;

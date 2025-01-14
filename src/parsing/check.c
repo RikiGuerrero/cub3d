@@ -6,11 +6,30 @@
 /*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 13:00:25 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/14 10:45:45 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/14 12:42:11 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_quit_newline(char **map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '\n')
+				map[i][j] = '\0';
+			j++;
+		}
+		i++;
+	}
+}
 
 int	ft_valid_elements(char **input)
 {
@@ -82,14 +101,16 @@ int	ft_valid_rgb(char **input)
 }
 int	ft_checks(t_cub *cub)
 {
-	if (ft_valid_elements(cub->map.input) == 1)
+	if (ft_valid_elements(cub->map->input) == 1)
 		return (1);
-	if (ft_valid_rgb(cub->map.input) == 1)
+	if (ft_valid_rgb(cub->map->input) == 1)
 		return (1);
-	cub->map.map = ft_map(cub->map.input);
-	if (!cub->map.map)
+	cub->map->map = ft_map(cub->map->input);
+	if (!cub->map->map)
 		return (1);
-	if (ft_valid_map(cub->map.map) == 1)
+	ft_quit_newline(cub->map->map);
+	if (ft_valid_map(cub->map->map) == 1)
 		return (1);
+	ft_set_map(cub->map);
 	return (0);
 }
