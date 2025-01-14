@@ -10,12 +10,25 @@ MLX42_LIB	= $(MLX42_DIR)
 
 INC			= -I. -I/usr/local/include -I$(MLX42_INC)
 
-SRC			=	main.c init_struct.c parsing/check_map.c parsing/check.c parsing/parse_cub.c\
-				parsing/texture.c
+RC_DIR 		= game/
+PR_DIR		= parsing/
+OBJ_DIR		= obj/
+SRC_DIR		= src/
+
+SRC_FILES	= main
+PR_FILES	= check_map check parse_cub texture
+RC_FILES	= gameLoop moves rayCasting renderWalls
+SRC_FILES 	+= $(addprefix $(RC_DIR), $(RC_FILES))
+SRC_FILES 	+= $(addprefix $(PR_DIR), $(PR_FILES))
+
+SRCS 		= $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
+SRCS 		= $(addprefix $(PR_DIR), $(addsuffix .c, $(PR_FILES)))
+OBJS 		= $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILES)))
+OBJF		=	.cache_exists
 
 LIBFT		= libft/libft.a
 
-OBJ			= $(SRC:.c=.o)
+
 
 NO_COLOR	=\033[0m
 BOLD		=\033[1m
@@ -28,9 +41,10 @@ LIBS		= -L/usr/local/lib -L$(MLX42_LIB) -lmlx42 -lglfw -ldl -lm
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJS) $(LIBFT)
 	@echo "$(YELLOW)Compiling $(NAME)...$(NO_COLOR)"
-	@gcc $(CFLAGS) $(INC) $(OBJ) $(LIBFT) $(LIBS) -o $(NAME) -lreadline > /dev/null
+	# @gcc $(CFLAGS) $(OBJS) $(MLX) -lglfw -L $(BREW) $(INC) -g -o $(NAME) $(LIBFT)
+	@gcc $(CFLAGS) $(INC) $(OBJS) $(LIBFT) $(LIBS) -o $(NAME) -lreadline > /dev/null
 	@echo "$(GREEN)Compilation of $(NAME) done!$(NO_COLOR)"
 
 libft/libft.a:
@@ -38,13 +52,17 @@ libft/libft.a:
 	@make -s all -C libft > /dev/null
 	@echo "$(GREEN)Compilation of libft done!$(NO_COLOR)"
 
-%.o: %.c
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJF)
 	@echo "$(YELLOW)Compiling $<...$(NO_COLOR)"
 	@gcc $(CFLAGS) $(INC) -c $< -o $@ > /dev/null
 
+$(OBJF):
+			@mkdir -p $(OBJ_DIR)
+			@mkdir -p $(OBJ_DIR)$(RC_DIR)
+
 clean:
 	@echo "$(YELLOW)Cleaning objects...$(NO_COLOR)"
-	@rm -f $(OBJ) > /dev/null
+	@rm -f $(OBJS) > /dev/null
 	@make clean -C libft > /dev/null
 	@echo "$(GREEN)Cleaning done.$(NO_COLOR)"
 
