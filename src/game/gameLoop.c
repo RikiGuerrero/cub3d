@@ -12,37 +12,6 @@
 
 #include "cub3d.h"
 
-void print_cub_structure(t_cub *cub)
-{
-    printf("Player:\n");
-    printf("  x: %d\n", cub->ply->plyr_x);
-    printf("  y: %d\n", cub->ply->plyr_y);
-    printf("  angle: %f\n", cub->ply->angle);
-    printf("  fov_rd: %f\n", cub->ply->fov_rd);
-    printf("  rot: %d\n", cub->ply->rot);
-    printf("  l_r: %d\n", cub->ply->l_r);
-    printf("  u_d: %d\n", cub->ply->u_d);
-
-    printf("Ray:\n");
-    printf("  ray_ngl: %f\n", cub->ray->ray_ngl);
-    printf("  distance: %f\n", cub->ray->distance);
-    printf("  flag: %d\n", cub->ray->flag);
-
-    printf("Map:\n");
-    printf("  p_x: %d\n", cub->map->p_x);
-    printf("  p_y: %d\n", cub->map->p_y);
-    printf("  w_map: %d\n", cub->map->w_map);
-    printf("  h_map: %d\n", cub->map->h_map);
-
-    printf("Config:\n");
-    printf("  no_texture: %s\n", cub->config.no_texture);
-    printf("  so_texture: %s\n", cub->config.so_texture);
-    printf("  we_texture: %s\n", cub->config.we_texture);
-    printf("  ea_texture: %s\n", cub->config.ea_texture);
-    printf("  floor_color: [%d, %d, %d]\n", cub->config.floor_color[0], cub->config.floor_color[1], cub->config.floor_color[2]);
-    printf("  ceiling_color: [%d, %d, %d]\n", cub->config.ceiling_color[0], cub->config.ceiling_color[1], cub->config.ceiling_color[2]);
-}
-
 void	game_loop(void *ml)
 {
 	t_cub	*mlx;

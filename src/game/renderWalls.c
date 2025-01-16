@@ -37,41 +37,75 @@ float	nor_angle(float angle)	// normalize the angle
 void	draw_floor_ceiling(t_cub *mlx, int ray, int t_pix, int b_pix)	// draw the floor and the ceiling
 {
 	int		i;
+	int		floor_color;
+	int		ceiling_color;
+	int		alpha = 0xFF;
+
+	floor_color = (alpha << 24) |
+			(mlx->config.floor_color[0] << 16) |
+			(mlx->config.floor_color[1] << 8) |
+			mlx->config.floor_color[2];
+
+	ceiling_color = (alpha << 24) |
+			(mlx->config.ceiling_color[0] << 16) |
+			(mlx->config.ceiling_color[1] << 8) |
+			mlx->config.ceiling_color[2];
 
 	i = b_pix;
 	while (i < S_H)
-		my_mlx_pixel_put(mlx, ray, i++, 0xB99470FF); // floor
+		my_mlx_pixel_put(mlx, ray, i++, floor_color); // floor
 	i = 0;
 	while (i < t_pix)
-		my_mlx_pixel_put(mlx, ray, i++, 0x89CFF3FF); // ceiling
+		my_mlx_pixel_put(mlx, ray, i++, ceiling_color); // ceiling
 }
 
-int	get_color(t_cub *mlx, int flag)	// get the color of the wall
+int	get_texture_color(mlx_texture_t *texture, int x, int y)
+{
+	int color;
+	int bpp = 4; // bytes per pixel
+
+	color = *(int *)(texture->pixels + (y * texture->width + x) * bpp);
+	return color;
+}
+
+int	get_texture(t_cub *mlx, int x, int y)	// get the color of the wall
 {
 	mlx->ray->ray_ngl = nor_angle(mlx->ray->ray_ngl); // normalize the angle
-	if (flag == 0)
+	if (mlx->ray->flag == 0)
 	{
 		if (mlx->ray->ray_ngl > M_PI / 2 && mlx->ray->ray_ngl < 3 * (M_PI / 2))
-			return (0xB5B5B5FF); // west wall
+			return get_texture_color(mlx->config.we_texture, x, y); // west wall
 		else
-			return (0xB5B5B5FF); // east wall
+			return get_texture_color(mlx->config.ea_texture, x, y); // east wall
 	}
 	else
 	{
 		if (mlx->ray->ray_ngl > 0 && mlx->ray->ray_ngl < M_PI)
-			return (0xF5F5F5FF); // south wall
+			return get_texture_color(mlx->config.so_texture, x, y); // south wall
 		else
-			return (0xF5F5F5FF); // north wall
+			return get_texture_color(mlx->config.no_texture, x, y); // north wall
 	}
 }
 
 void	draw_wall(t_cub *mlx, int ray, int t_pix, int b_pix)	// draw the wall
 {
 	int color;
+	int y;
+	int	texture_x;
+	int	texture_y;
+	double	wall_height = b_pix - t_pix;
+	double texture_step = (double)mlx->config.no_texture->height / wall_height;
+	double texture_pos = 0.0;
 
-	color = get_color(mlx, mlx->ray->flag);
-	while (t_pix < b_pix)
-		my_mlx_pixel_put(mlx, ray, t_pix++, color);
+	y = t_pix;
+	while (y < b_pix)
+	{
+		texture_x = (int)(ray % mlx->config.no_texture->width);
+		texture_y = (int)texture_pos;
+		color = get_texture(mlx, texture_x, texture_y);
+		my_mlx_pixel_put(mlx, ray, y++, color);
+		texture_pos += texture_step;
+	}
 }
 
 void	render_wall(t_cub *mlx, int ray)	// render the wall

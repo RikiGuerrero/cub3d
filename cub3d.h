@@ -44,10 +44,14 @@ typedef struct	s_map
 
 typedef struct s_config
 {
-	char	*no_texture;
-	char	*so_texture;
-	char	*we_texture;
-	char	*ea_texture;
+	char	*no_texture_path;
+	char	*so_texture_path;
+	char	*we_texture_path;
+	char	*ea_texture_path;
+	mlx_texture_t *no_texture;
+	mlx_texture_t *so_texture;
+	mlx_texture_t *we_texture;
+	mlx_texture_t *ea_texture;
 	int		floor_color[3];
 	int		ceiling_color[3];
 }				t_config;
