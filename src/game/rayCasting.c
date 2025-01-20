@@ -6,7 +6,7 @@
 /*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:28:54 by pjimenez          #+#    #+#             */
-/*   Updated: 2025/01/15 14:08:24 by pjimenez         ###   ########.fr       */
+/*   Updated: 2025/01/20 13:49:21 by pjimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,14 @@ float get_h_inter(t_cub *cub, float angl)
 {
 	float h_y;
 	float h_x;
+	float x_step;
+	float y_step;
+	int pixel;
 	t_player *ply;
 
 	ply = cub->ply;
-
+	y_step = TILE_SIZE;
+	x_step = TILE_SIZE / tan(angl);
 	h_y = floor(ply->plyr_y / TILE_SIZE) * TILE_SIZE;
 	h_x = ply->plyr_x + (h_y - ply->plyr_y) / tan(angl);
 }
