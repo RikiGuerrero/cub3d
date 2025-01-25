@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:52:01 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/14 12:17:40 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/25 14:27:07 by pjimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct	s_map
 	char	**map;
 	int		p_x;
 	int		p_y;
+	char 	init_view;
 	int		w_map;
 	int		h_map;
 }				t_map;

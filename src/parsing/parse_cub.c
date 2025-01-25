@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:13:19 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/14 12:49:43 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/25 14:31:36 by pjimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void ft_set_map(t_map *map)
 			{
 				map->p_x = j;
 				map->p_y = i;
+				map->init_view = map->map[i][j];
 				map->p_x++;
 				map->p_y++;
 				return ;
