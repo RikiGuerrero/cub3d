@@ -60,15 +60,31 @@ void	ft_get_textures(t_cub *cub)
 			cub->config.ea_texture_path = ft_strdup(&cub->map->input[i][j + 3]);
 		else if (ft_strncmp(cub->map->input[i], "F ", 2) == 0)
 		{
-			cub->config.floor_color[0] = ft_atoi(&cub->map->input[i][j + 2]);
-			cub->config.floor_color[1] = ft_atoi(&cub->map->input[i][j + 5]);
-			cub->config.floor_color[2] = ft_atoi(&cub->map->input[i][j + 8]);
+			char **colors = ft_split(&cub->map->input[i][2], ',');
+			if (colors)
+			{
+				cub->config.floor_color[0] = ft_atoi(colors[0]);
+				cub->config.floor_color[1] = ft_atoi(colors[1]);
+				cub->config.floor_color[2] = ft_atoi(colors[2]);
+				free(colors[0]);
+				free(colors[1]);
+				free(colors[2]);
+				free(colors);
+			}
 		}
 		else if (ft_strncmp(cub->map->input[i], "C ", 2) == 0)
 		{
-			cub->config.ceiling_color[0] = ft_atoi(&cub->map->input[i][j + 2]);
-			cub->config.ceiling_color[1] = ft_atoi(&cub->map->input[i][j + 5]);
-			cub->config.ceiling_color[2] = ft_atoi(&cub->map->input[i][j + 8]);
+			char **colors = ft_split(&cub->map->input[i][2], ',');
+			if (colors)
+			{
+				cub->config.ceiling_color[0] = ft_atoi(colors[0]);
+				cub->config.ceiling_color[1] = ft_atoi(colors[1]);
+				cub->config.ceiling_color[2] = ft_atoi(colors[2]);
+				free(colors[0]);
+				free(colors[1]);
+				free(colors[2]);
+				free(colors);
+			}
 		}
 		i++;
 	}

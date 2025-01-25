@@ -34,22 +34,21 @@ float	nor_angle(float angle)	// normalize the angle
 	return (angle);
 }
 
+int	get_rgba(int r, int g, int b, int a)
+{
+	return (r << 24 | g << 16 | b << 8 | a << 0);
+}
+
 void	draw_floor_ceiling(t_cub *mlx, int ray, int t_pix, int b_pix)	// draw the floor and the ceiling
 {
 	int		i;
 	int		floor_color;
 	int		ceiling_color;
-	int		alpha = 0xFF;
 
-	floor_color = (alpha << 24) |
-			(mlx->config.floor_color[0] << 16) |
-			(mlx->config.floor_color[1] << 8) |
-			mlx->config.floor_color[2];
-
-	ceiling_color = (alpha << 24) |
-			(mlx->config.ceiling_color[0] << 16) |
-			(mlx->config.ceiling_color[1] << 8) |
-			mlx->config.ceiling_color[2];
+	floor_color = get_rgba(mlx->config.floor_color[0], mlx->config.floor_color[1], \
+		mlx->config.floor_color[2], 255);
+	ceiling_color = get_rgba(mlx->config.ceiling_color[0], mlx->config.ceiling_color[1], \
+		mlx->config.ceiling_color[2], 255);
 
 	i = b_pix;
 	while (i < S_H)
