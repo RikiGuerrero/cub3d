@@ -89,6 +89,7 @@ float	get_h_inter(t_cub *cub, float angl)
 		h_x += x_step;
 		h_y += y_step;
 	}
+	cub->ray->hor_x = h_x;
 	return (sqrt(pow(h_x - cub->ply->plyr_x, 2) + pow(h_y - cub->ply->plyr_y, 2)));
 }
 
@@ -112,6 +113,7 @@ float	get_v_inter(t_cub *cub, float angl)
 		v_x += x_step;
 		v_y += y_step;
 	}
+	cub->ray->ver_y = v_y;
 	return (sqrt(pow(v_x - cub->ply->plyr_x, 2) + pow(v_y - cub->ply->plyr_y, 2)));
 }
 

@@ -62,6 +62,11 @@ typedef struct s_ray
 	double	ray_ngl;
 	double	distance;
 	int		flag;
+	double	hor_x;
+	double	hor_y;
+	double	ver_x;
+	double	ver_y;
+	int		index;
 }				t_ray;
 
 typedef struct s_player
