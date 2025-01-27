@@ -91,8 +91,8 @@ double get_texture_offset(mlx_texture_t *texture, t_cub *mlx) // Calcula el desp
 void	draw_wall(t_cub *mlx, int t_pix, int b_pix, double wall_h)
 {
 	mlx_texture_t	*texture = get_texture(mlx, mlx->ray->flag);
-	uint32_t		*arr = (uint32_t *)texture->pixels;
-	double			factor = (double)texture->height / wall_h;
+	uint32_t		*arr = (uint32_t *)texture->pixels; // Arreglo de píxeles de la textura, para manipular y acceder a los colores
+	double			factor = (double)texture->height / wall_h; // Factor de escala para la textura (relación entre la altura de la pared y la textura) rescalado 
 	double			x_offset = get_texture_offset(texture, mlx);
 	double			y_offset = (t_pix - (S_H / 2) + (wall_h / 2)) * factor;
 
@@ -102,7 +102,7 @@ void	draw_wall(t_cub *mlx, int t_pix, int b_pix, double wall_h)
 	{
 		my_mlx_pixel_put(mlx, mlx->ray->index, t_pix, reverse_bytes(
 			arr[(int)y_offset * texture->width + (int)x_offset]));
-		y_offset += factor;
+		y_offset += factor; // Incrementa el desplazamiento en y para la textura (escala)
 		t_pix++;
 	}
 }
