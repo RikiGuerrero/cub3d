@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:45:56 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/28 11:55:40 by pjimenez         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:28:42 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ void free_config(t_config *config)
 	free(config->so_texture);
 	free(config->we_texture);
 	free(config->ea_texture);
-	// free(config->floor_color);
-	// free(config->ceiling_color);
 }
 
 void free_map(t_map *map)
@@ -34,13 +32,14 @@ void free_map(t_map *map)
 	while (map->input[i])
 		free(map->input[i++]);
 	free(map->input);
-	free(map);
 }
 
 void free_cub(t_cub *cub)
 {
 	free_config(&cub->config);
-	free_map(cub->map);	
+	if (cub->map->input)
+		free_map(cub->map);	
+	free(cub->map);
 	free(cub->ply);
 	free(cub->ray);
 }

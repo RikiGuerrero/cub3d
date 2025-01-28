@@ -6,7 +6,7 @@
 /*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 17:02:53 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/14 12:23:47 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:12:27 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	ft_get_textures(t_cub *cub)
 		i++;
 	}
 
-	 // Añadir prefijo "./" a las rutas de textura
     cub->config.no_texture_path = add_prefix("./", cub->config.no_texture_path);
 	cub->config.so_texture_path = add_prefix("./", cub->config.so_texture_path);
 	cub->config.we_texture_path = add_prefix("./", cub->config.we_texture_path);
@@ -99,10 +98,6 @@ void	ft_get_textures(t_cub *cub)
     remove_non_printable(cub->config.so_texture_path);
     remove_non_printable(cub->config.we_texture_path);
     remove_non_printable(cub->config.ea_texture_path);
-
-	// Verificar antes si los archivos estan correctos
-	// Liberar memoria de las rutas completas
-
 
 	cub->config.no_texture = mlx_load_png(cub->config.no_texture_path);
 	cub->config.so_texture = mlx_load_png(cub->config.so_texture_path);

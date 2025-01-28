@@ -14,7 +14,7 @@ OBJ_DIR     = obj/
 SRC_DIR     = src/
 
 SRC_FILES   = main
-PR_FILES    = check_map check parse_cub texture init_struct
+PR_FILES    = check_map check parse_cub texture init_struct utils_parse
 RC_FILES    = gameLoop moves rayCasting renderWalls
 SRC_FILES  += $(addprefix $(RC_DIR), $(RC_FILES))
 SRC_FILES  += $(addprefix $(PR_DIR), $(PR_FILES))

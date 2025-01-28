@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 13:00:25 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/25 14:26:34 by pjimenez         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:46:06 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,16 @@ int	ft_valid_rgb(char **input)
 			if (!rgb_values || !rgb_values[0] || !rgb_values[1] || !rgb_values[2] || rgb_values[3])
 			{
 				ft_putstr_fd("Error\nInvalid RGB format\n", 2);
+				ft_free_split(rgb_values);
 				return (1);
 			}
 			if (!ft_is_valid_number(rgb_values[0]) || !ft_is_valid_number(rgb_values[1]) || !ft_is_valid_number(rgb_values[2]))
 			{
 				ft_putstr_fd("Error\nRGB values out of range\n", 2);
+				ft_free_split(rgb_values);
 				return (1);
 			}
-			//ft_free_split(rgb_values);
+			ft_free_split(rgb_values);
 		}
 		i++;
 	}

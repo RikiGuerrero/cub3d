@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:13:19 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/25 14:31:36 by pjimenez         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:36:23 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	**read_file(char *file)
 		char *cr = strchr(line, '\r');
 		if (cr)
 			memmove(cr, cr + 1, strlen(cr));
-		map = ft_realloc(map, i + 1, i + 2); // lineas para eliminar \r
+		map = ft_realloc(map, i + 1, i + 2);
 		if (!map)
 			return (NULL);
 		map[i] = line;
@@ -124,13 +124,10 @@ int	parse_cub(t_cub *cub, char *file)
 	init_cub(cub);
 	cub->map->input = read_file(file);
 	if (!cub->map->input)
-		return (1);
-		//return (ft_delete(cub), 1);
+		return (free_cub(cub), 1);
 	if (ft_checks(cub) == 1)
-		return(1);
-		//return (ft_delete(cub), 1);
+		return (free_cub(cub), 1);
 	if (ft_parse_textures(cub) == 1)
-		return (1);
-		//return (ft_delete(cub), 1);
+		return (free_cub(cub), 1);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:52:01 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/25 14:27:07 by pjimenez         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:43:46 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ char	**ft_map(char **input);
 int		ft_valid_map(char **map);
 int		ft_parse_textures(t_cub *cub);
 void 	ft_set_map(t_map *map);
+void	free_cub(t_cub *cub);
+void 	ft_free_split(char **split);
 
 // Game
 void mlx_key(mlx_key_data_t keydata, void *ml);
