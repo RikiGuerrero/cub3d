@@ -6,7 +6,7 @@
 /*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:29:10 by pjimenez          #+#    #+#             */
-/*   Updated: 2025/01/28 11:59:11 by pjimenez         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:09:50 by pjimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,19 @@ void	game_loop(void *ml)
 	mlx_image_to_window(cub->mlx_p, cub->img, 0, 0);
 }
 
-void init_the_player(t_cub *cub)
+void	init_the_player(t_cub *cub)
 {
 	cub->ply->plyr_x = cub->map->p_x * TILE_SIZE + TILE_SIZE / 2;
 	cub->ply->plyr_y = cub->map->p_y * TILE_SIZE + TILE_SIZE / 2;
 	cub->ply->fov_rd = (FOV * M_PI) / 180;
-	cub->ply->angle = (cub->map->init_view == 'N') ? 3 * M_PI / 2 : 
-	(cub->map->init_view == 'S') ? M_PI / 2 : 
-	(cub->map->init_view == 'W') ? M_PI : 0;
-
+	if (cub->map->init_view == 'N')
+		cub->ply->angle = 3 * M_PI / 2;
+	else if (cub->map->init_view == 'S')
+		cub->ply->angle = M_PI / 2;
+	else if (cub->map->init_view == 'W')
+		cub->ply->angle = M_PI;
+	else if (cub->map->init_view == 'E')
+		cub->ply->angle = 0;
 }
 
 void	start_the_game(t_cub *cub)

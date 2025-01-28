@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:52:01 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/28 12:43:46 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:06:19 by pjimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,13 +102,20 @@ void	free_cub(t_cub *cub);
 void 	ft_free_split(char **split);
 
 // Game
-void mlx_key(mlx_key_data_t keydata, void *ml);
-void	start_the_game(t_cub *cub);
-void	hook(t_cub *cub, double move_x, double move_y);
-void	cast_rays(t_cub *cub);
-void	ft_exit(t_cub *cub);
-float	nor_angle(float angle);
-void	render_wall(t_cub *cub, int ray);
+void			mlx_key(mlx_key_data_t keydata, void *ml);
+void			start_the_game(t_cub *cub);
+void			hook(t_cub *cub, double move_x, double move_y);
+void			cast_rays(t_cub *cub);
+void			ft_exit(t_cub *cub);
+float			nor_angle(float angle);
+void			render_wall(t_cub *cub, int ray);
+int				unit_circle(float angle, char c);
+int				inter_check(float angle, float *inter, float *step, int is_horizon);
+int				wall_hit(float x, float y, t_cub *cub);
+unsigned int	reverse_bytes(unsigned int color);
+void			my_mlx_pixel_put(t_cub *mlx, int x, int y, int color);
+int				get_rgba(int r, int g, int b, int a);
+
 
 #endif
 

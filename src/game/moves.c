@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:25:16 by pjimenez          #+#    #+#             */
-/*   Updated: 2025/01/14 12:21:03 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/28 12:09:08 by pjimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ void	ft_reles(mlx_key_data_t keydata, t_cub *mlx)
 		mlx->ply->rot = 0;
 }
 
-void mlx_key(mlx_key_data_t keydata, void *ml)
+void	mlx_key(mlx_key_data_t keydata, void *ml)
 {
 	t_cub	*mlx;
 
 	mlx = ml;
-	if (keydata.key == MLX_KEY_ESCAPE && (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT))
+	if (keydata.key == MLX_KEY_ESCAPE && (keydata.action == MLX_PRESS
+			|| keydata.action == MLX_REPEAT))
 		ft_exit(mlx);
 	else if (keydata.key == MLX_KEY_A && (keydata.action == MLX_PRESS))
 		mlx->ply->l_r = -1;
