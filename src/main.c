@@ -3,14 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:45:56 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/28 11:35:53 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:55:40 by pjimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void free_config(t_config *config)
+{
+	free(config->no_texture_path);
+	free(config->so_texture_path);
+	free(config->we_texture_path);
+	free(config->ea_texture_path);
+	free(config->no_texture);
+	free(config->so_texture);
+	free(config->we_texture);
+	free(config->ea_texture);
+	// free(config->floor_color);
+	// free(config->ceiling_color);
+}
+
+void free_map(t_map *map)
+{
+	int i; 
+	
+	i = 0;
+	while (map->input[i])
+		free(map->input[i++]);
+	free(map->input);
+	free(map);
+}
+
+void free_cub(t_cub *cub)
+{
+	free_config(&cub->config);
+	free_map(cub->map);	
+	free(cub->ply);
+	free(cub->ray);
+}
 
 void	ft_exit(t_cub *cub) 		// exit the game
 {
