@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gameLoop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:29:10 by pjimenez          #+#    #+#             */
-/*   Updated: 2025/01/25 14:33:01 by pjimenez         ###   ########.fr       */
+/*   Updated: 2025/01/28 11:39:06 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void init_the_player(t_cub *cub)
 
 void	start_the_game(t_cub *cub)
 {
-	cub->ply = calloc(1, sizeof(t_player));
-	cub->ray = calloc(1, sizeof(t_ray));
 	cub->mlx_p = mlx_init(S_W, S_H, "Cub3D", 0);
 	init_the_player(cub);
 	mlx_loop_hook(cub->mlx_p, &game_loop, cub);
