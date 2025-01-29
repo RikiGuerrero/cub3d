@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void free_config(t_config *config)
+void	free_config(t_config *config)
 {
 	free(config->no_texture_path);
 	free(config->so_texture_path);
@@ -24,39 +24,39 @@ void free_config(t_config *config)
 	free(config->ea_texture);
 }
 
-void free_map(t_map *map)
+void	free_map(t_map *map)
 {
-	int i; 
-	
+	int	i;
+
 	i = 0;
 	while (map->input[i])
 		free(map->input[i++]);
 	free(map->input);
 }
 
-void free_cub(t_cub *cub)
+void	free_cub(t_cub *cub)
 {
 	free_config(&cub->config);
 	if (cub->map->input)
-		free_map(cub->map);	
+		free_map(cub->map);
 	free(cub->map);
 	free(cub->ply);
 	free(cub->ray);
 }
 
-void	ft_exit(t_cub *cub) 		// exit the game
+void	ft_exit(t_cub *cub)
 {
 	free_cub(cub);
-	mlx_delete_image(cub->mlx_p, cub->img); // delete the image
-	mlx_close_window(cub->mlx_p); // close the window
-	mlx_terminate(cub->mlx_p); // terminate the mlx pointer
-	printf("Game closed\n"); // print the message
-	exit(0); // exit the game
+	mlx_delete_image(cub->mlx_p, cub->img);
+	mlx_close_window(cub->mlx_p);
+	mlx_terminate(cub->mlx_p);
+	printf("Game closed\n");
+	exit(0);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_cub cub;
+	t_cub	cub;
 
 	if (ac != 2 || ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".cub", 4))
 	{
@@ -68,7 +68,7 @@ int main(int ac, char **av)
 		if (parse_cub(&cub, av[1]) == 1)
 			return (1);
 		printf("Running game\n");
-        start_the_game(&cub);
+		start_the_game(&cub);
 		printf("Game over\n");
 	}
 	return (0);

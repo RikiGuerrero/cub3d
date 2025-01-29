@@ -35,7 +35,7 @@ void	init_config(t_config *config)
 	config->ea_texture = NULL;
 }
 
-void	init_cub(t_cub *cub)
+void	init_struct(t_cub *cub)
 {
 	cub->map = ft_calloc(1, sizeof(t_map));
 	cub->ply = ft_calloc(1, sizeof(t_player));

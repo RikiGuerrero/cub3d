@@ -9,12 +9,12 @@ MLX42_LIB   = $(MLX42_DIR)
 INC         = -I. -I/usr/local/include -I$(MLX42_INC)
 
 RC_DIR      = game/
-PR_DIR      = parsing/
+PR_DIR      = parser/
 OBJ_DIR     = obj/
 SRC_DIR     = src/
 
 SRC_FILES   = main
-PR_FILES    = check_map check parse_cub texture init_struct utils_parse
+PR_FILES    = checkMap check parseCub texture initStruct parseUtils textureUtils
 RC_FILES    = gameLoop moves rayCasting rayCastUtils render renderUtils
 SRC_FILES  += $(addprefix $(RC_DIR), $(RC_FILES))
 SRC_FILES  += $(addprefix $(PR_DIR), $(PR_FILES))

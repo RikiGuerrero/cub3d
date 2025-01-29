@@ -12,34 +12,29 @@
 
 #include "cub3d.h"
 
-void ft_set_map(t_map *map)
+void	ft_set_map(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
-	i = 0;
-	while(map->map[0][map->w_map] != '\0')
+	while (map->map[0][map->w_map] != '\0')
 		map->w_map++;
-	while(map->map[map->h_map] != NULL)
+	while (map->map[map->h_map] != NULL)
 		map->h_map++;
-	while (i < map->h_map)
+	i = -1;
+	while (++i < map->h_map)
 	{
-		j = 0;
-		while (j < map->w_map)
+		j = -1;
+		while (++j < map->w_map)
 		{
-			if (map->map[i][j] == 'N' || map->map[i][j] == 'S' ||
-				map->map[i][j] == 'E' || map->map[i][j] == 'W')
+			if (ft_strchr("NSWE", map->map[i][j]))
 			{
-				map->p_x = j;
-				map->p_y = i;
+				map->p_x = j + 1;
+				map->p_y = i + 1;
 				map->init_view = map->map[i][j];
-				map->p_x++;
-				map->p_y++;
 				return ;
 			}
-			j++;
 		}
-		i++;
 	}
 }
 
@@ -70,63 +65,35 @@ char	**read_file(char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-	{
-		ft_putstr_fd("Error\nFile not found\n", 2);
-		return (NULL);
-	}
+		return (ft_putstr_fd("Error\nFile not found\n", 2), NULL);
 	map = (char **)ft_calloc(1, sizeof(char *));
 	if (!map)
 		return (NULL);
 	i = 0;
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line)
 	{
-		char *cr = strchr(line, '\r');
-		if (cr)
-			memmove(cr, cr + 1, strlen(cr));
+		if (ft_strchr(line, '\r'))
+			ft_memmove(ft_strchr(line, '\r'), ft_strchr(line, '\r') + 1,
+				ft_strlen(ft_strchr(line, '\r')));
 		map = ft_realloc(map, i + 1, i + 2);
 		if (!map)
 			return (NULL);
-		map[i] = line;
-		i++;
+		map[i++] = line;
+		line = get_next_line(fd);
 	}
-	map[i] = NULL;
-	close(fd);
-	return (map);
-}
-
-char	**ft_map(char **input)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (input[i])
-	{
-		j = 0;
-		while (input[i][j] == ' ')
-			j++;
-		if (input[i][j] && input[i][j] != '\n' &&
-			ft_strncmp(input[i], "NO ", 3) != 0 &&
-			ft_strncmp(input[i], "SO ", 3) != 0 &&
-			ft_strncmp(input[i], "WE ", 3) != 0 &&
-			ft_strncmp(input[i], "EA ", 3) != 0 &&
-			ft_strncmp(input[i], "F ", 2) != 0 &&
-			ft_strncmp(input[i], "C ", 2) != 0)
-			return (&input[i]);
-		i++;
-	}
-	ft_putstr_fd("Error\nInvalid map\n", 2);
-	return (NULL);
+	return (map[i] = NULL, close(fd), map);
 }
 
 int	parse_cub(t_cub *cub, char *file)
 {
-	init_cub(cub);
+	init_struct(cub);
 	cub->map->input = read_file(file);
 	if (!cub->map->input)
 		return (free_cub(cub), 1);
-	if (ft_checks(cub) == 1)
+	if (ft_check(cub) == 1)
 		return (free_cub(cub), 1);
+	ft_set_map(cub->map);
 	if (ft_parse_textures(cub) == 1)
 		return (free_cub(cub), 1);
 	return (0);

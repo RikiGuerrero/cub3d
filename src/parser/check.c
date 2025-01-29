@@ -12,23 +12,29 @@
 
 #include "cub3d.h"
 
-void	ft_quit_newline(char **map)
+char	**ft_map(char **input)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
-	while (map[i])
+	while (input[i])
 	{
 		j = 0;
-		while (map[i][j])
-		{
-			if (map[i][j] == '\n')
-				map[i][j] = '\0';
+		while (input[i][j] == ' ')
 			j++;
-		}
+		if (input[i][j] && input[i][j] != '\n' &&
+			ft_strncmp(input[i], "NO ", 3) != 0 &&
+			ft_strncmp(input[i], "SO ", 3) != 0 &&
+			ft_strncmp(input[i], "WE ", 3) != 0 &&
+			ft_strncmp(input[i], "EA ", 3) != 0 &&
+			ft_strncmp(input[i], "F ", 2) != 0 &&
+			ft_strncmp(input[i], "C ", 2) != 0)
+			return (&input[i]);
 		i++;
 	}
+	ft_putstr_fd("Error\nInvalid map\n", 2);
+	return (NULL);
 }
 
 int	ft_valid_elements(char **input)
@@ -69,39 +75,31 @@ int	ft_valid_rgb(char **input)
 {
 	int		i;
 	int		j;
-	char	**rgb_values;
+	char	**rgb;
 
-	i = 0;
-	while (input[i])
+	i = -1;
+	while (input[++i])
 	{
 		j = 0;
 		while (input[i][j] == ' ')
 			j++;
-		if (input[i][j] == 'F' || input[i][j] == 'C')
+		if (ft_strchr("FC", input[i][j]))
 		{
-			j++;
-			while (input[i][j] == ' ')
-				j++;
-			rgb_values = ft_split(&input[i][j], ',');
-			if (!rgb_values || !rgb_values[0] || !rgb_values[1] || !rgb_values[2] || rgb_values[3])
-			{
-				ft_putstr_fd("Error\nInvalid RGB format\n", 2);
-				ft_free_split(rgb_values);
-				return (1);
-			}
-			if (!ft_is_valid_number(rgb_values[0]) || !ft_is_valid_number(rgb_values[1]) || !ft_is_valid_number(rgb_values[2]))
-			{
-				ft_putstr_fd("Error\nRGB values out of range\n", 2);
-				ft_free_split(rgb_values);
-				return (1);
-			}
-			ft_free_split(rgb_values);
+			rgb = ft_split(&input[i][++j], ',');
+			if (!rgb || !rgb[0] || !rgb[1] || !rgb[2] || rgb[3])
+				return (ft_putstr_fd("Error\nInvalid RGB format\n", 2),
+					ft_free_split(rgb), 1);
+			if (!ft_is_valid_number(rgb[0]) || !ft_is_valid_number(rgb[1])
+				|| !ft_is_valid_number(rgb[2]))
+				return (ft_putstr_fd("Error\nRGB values out of range\n", 2),
+					ft_free_split(rgb), 1);
+			ft_free_split(rgb);
 		}
-		i++;
 	}
 	return (0);
 }
-int	ft_checks(t_cub *cub)
+
+int	ft_check(t_cub *cub)
 {
 	if (ft_valid_elements(cub->map->input) == 1)
 		return (1);
@@ -111,8 +109,7 @@ int	ft_checks(t_cub *cub)
 	if (!cub->map->map)
 		return (1);
 	ft_quit_newline(cub->map->map);
-	if (ft_valid_map(cub->map->map) == 1)
+	if (ft_check_map(cub->map->map) == 1)
 		return (1);
-	ft_set_map(cub->map);
 	return (0);
 }
