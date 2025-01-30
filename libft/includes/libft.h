@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jmartos- <jmartos-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:51:25 by jmartos-          #+#    #+#             */
-/*   Updated: 2024/07/23 13:38:35 by jmartos-         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:39:08 by pjimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,7 @@ char	*ft_strndup(const char *s1, int n);
 char	*ft_insert_str(char *main, char *piece, size_t pos);
 // (minishell) Borramos de un string desde start hasta finish.
 char	*ft_delete_str(char *main, size_t start, size_t finish);
+// (minishell) Comprobamos si un string contiene otro string.
+char	*ft_strstr(const char *haystack, const char *needle);
 
 #endif
