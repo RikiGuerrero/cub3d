@@ -3,18 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 17:02:53 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/29 19:55:35 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:43:29 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_parse_texture(char *line, char **texture_path, int offset)
+void	ft_parse_texture(char *line, char **texture_path, int j)
 {
-	*texture_path = ft_strdup(&line[offset]);
+	j += 2;
+	while (line[j] == ' ')
+		j++;
+	*texture_path = ft_strdup(&line[j]);
 	*texture_path = add_prefix("./", *texture_path);
 	remove_non_printable(*texture_path);
 }
@@ -38,14 +41,14 @@ void	ft_parse_color(char *line, int *color)
 
 void	ft_parse_texture_line(char *line, t_cub *cub, int j)
 {
-	if (ft_strncmp(line, "NO ", 3) == 0)
-		ft_parse_texture(line, &cub->config.no_texture_path, j + 3);
+	if (ft_strstr(line, "NO") != NULL)
+		ft_parse_texture(line, &cub->config.no_texture_path, j);
 	else if (ft_strncmp(line, "SO ", 3) == 0)
-		ft_parse_texture(line, &cub->config.so_texture_path, j + 3);
+		ft_parse_texture(line, &cub->config.so_texture_path, j);
 	else if (ft_strncmp(line, "WE ", 3) == 0)
-		ft_parse_texture(line, &cub->config.we_texture_path, j + 3);
+		ft_parse_texture(line, &cub->config.we_texture_path, j);
 	else if (ft_strncmp(line, "EA ", 3) == 0)
-		ft_parse_texture(line, &cub->config.ea_texture_path, j + 3);
+		ft_parse_texture(line, &cub->config.ea_texture_path, j);
 	else if (ft_strncmp(line, "F ", 2) == 0)
 		ft_parse_color(&line[2], cub->config.floor_color);
 	else if (ft_strncmp(line, "C ", 2) == 0)
@@ -65,7 +68,8 @@ void	ft_get_textures(t_cub *cub)
 			j++;
 		ft_parse_texture_line(cub->map->input[i], cub, j);
 	}
-	ft_load_textures(cub);
+	if (ft_check_textures(cub) == 0)
+		ft_load_textures(cub);
 }
 
 int	ft_parse_textures(t_cub *cub)

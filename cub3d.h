@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:52:01 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/29 19:58:59 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/30 13:43:59 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void			remove_non_printable(char *str);
 char			*add_prefix(const char *prefix, const char *path);
 void			ft_load_textures(t_cub *cub);
 void			ft_quit_newline(char **map);
+int				ft_check_textures(t_cub *cub);
 
 // Game
 void			mlx_key(mlx_key_data_t keydata, void *ml);

@@ -6,7 +6,7 @@
 /*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 13:00:25 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/28 12:46:06 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:36:38 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ char	**ft_map(char **input)
 		while (input[i][j] == ' ')
 			j++;
 		if (input[i][j] && input[i][j] != '\n' &&
-			ft_strncmp(input[i], "NO ", 3) != 0 &&
-			ft_strncmp(input[i], "SO ", 3) != 0 &&
+			ft_strstr(input[i], "NO") == NULL &&
+			ft_strstr(input[i], "SO") == NULL &&
 			ft_strncmp(input[i], "WE ", 3) != 0 &&
 			ft_strncmp(input[i], "EA ", 3) != 0 &&
 			ft_strncmp(input[i], "F ", 2) != 0 &&
@@ -46,7 +46,7 @@ int	ft_valid_elements(char **input)
 	count = 0;
 	while (input[i])
 	{
-		if (ft_strncmp(input[i], "NO ", 3) == 0
+		if (ft_strstr("NO", input[i]) == 0
 			|| ft_strncmp(input[i], "SO ", 3) == 0
 			|| ft_strncmp(input[i], "WE ", 3) == 0
 			|| ft_strncmp(input[i], "EA ", 3) == 0
