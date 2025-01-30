@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 13:00:25 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/30 12:36:38 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:35:43 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ char	**ft_map(char **input)
 		if (input[i][j] && input[i][j] != '\n' &&
 			ft_strstr(input[i], "NO") == NULL &&
 			ft_strstr(input[i], "SO") == NULL &&
-			ft_strncmp(input[i], "WE ", 3) != 0 &&
-			ft_strncmp(input[i], "EA ", 3) != 0 &&
-			ft_strncmp(input[i], "F ", 2) != 0 &&
-			ft_strncmp(input[i], "C ", 2) != 0)
+			ft_strstr(input[i], "WE") == NULL &&
+			ft_strstr(input[i], "EA") == NULL &&
+			ft_strstr(input[i], "F") == NULL &&
+			ft_strstr(input[i], "C") == NULL)
 			return (&input[i]);
 		i++;
 	}
@@ -47,11 +47,11 @@ int	ft_valid_elements(char **input)
 	while (input[i])
 	{
 		if (ft_strstr("NO", input[i]) == 0
-			|| ft_strncmp(input[i], "SO ", 3) == 0
-			|| ft_strncmp(input[i], "WE ", 3) == 0
-			|| ft_strncmp(input[i], "EA ", 3) == 0
-			|| ft_strncmp(input[i], "F ", 2) == 0
-			|| ft_strncmp(input[i], "C ", 2) == 0)
+			|| ft_strstr("SO", input[i]) == 0
+			|| ft_strstr("WE", input[i]) == 0
+			|| ft_strstr("EA", input[i]) == 0
+			|| ft_strstr("F", input[i]) == 0
+			|| ft_strstr("C", input[i]) == 0)
 			count++;
 		else if (input[i][0] != '\n' && count != 6)
 		{

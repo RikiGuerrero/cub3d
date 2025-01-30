@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 17:02:53 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/30 13:43:29 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:38:11 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,15 @@ void	ft_parse_texture_line(char *line, t_cub *cub, int j)
 {
 	if (ft_strstr(line, "NO") != NULL)
 		ft_parse_texture(line, &cub->config.no_texture_path, j);
-	else if (ft_strncmp(line, "SO ", 3) == 0)
+	else if (ft_strstr(line, "SO") != NULL)
 		ft_parse_texture(line, &cub->config.so_texture_path, j);
-	else if (ft_strncmp(line, "WE ", 3) == 0)
+	else if (ft_strstr(line, "WE") != NULL)
 		ft_parse_texture(line, &cub->config.we_texture_path, j);
-	else if (ft_strncmp(line, "EA ", 3) == 0)
+	else if (ft_strstr(line, "EA") != NULL)
 		ft_parse_texture(line, &cub->config.ea_texture_path, j);
-	else if (ft_strncmp(line, "F ", 2) == 0)
+	else if (ft_strstr(line, "F") != NULL)
 		ft_parse_color(&line[2], cub->config.floor_color);
-	else if (ft_strncmp(line, "C ", 2) == 0)
+	else if (ft_strstr(line, "C") != NULL)
 		ft_parse_color(&line[2], cub->config.ceiling_color);
 }
 
