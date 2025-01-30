@@ -29,6 +29,7 @@ FUNCTIONS = src/ft_isalpha.c src/ft_isdigit.c src/ft_isalnum.c src/ft_isascii.c 
 			src/ft_strd_add.c \
 			src/ft_strd_lastdel.c \
 			src/ft_strcmp.c \
+			src/ft_strstr.c \
 			src/ft_strndup.c \
 			src/ft_insert_str.c \
 			src/ft_delete_str.c 
