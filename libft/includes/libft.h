@@ -6,7 +6,7 @@
 /*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:51:25 by jmartos-          #+#    #+#             */
-/*   Updated: 2025/01/30 12:39:08 by pjimenez         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:39:39 by pjimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,29 +91,29 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_isdigit_str(char *str);
 // Cuenta las palabras de un string usando un delimitador.
 int		ft_word_counter(char const *s, char c);
-// (minishell) Duplica un array bidimensional, similar a "ft_strdup".
+// Duplica un array bidimensional, similar a "ft_strdup".
 char	**ft_matrixdup(char **matrix);
-// (minishell) Calcula la longuitud en "str", desde "start" hasta encontrar "c".
+// Calcula la longuitud en "str", desde "start" hasta encontrar "c".
 int		ft_substrlen(char *str, int start, char chr);
-// (minishell) Calcula la longitud de un array bidimensional.
+// Calcula la longitud de un array bidimensional.
 int		ft_strd_len(char **str);
-// (minishell) Libera un array bidimensional con seguridad.
+// Libera un array bidimensional con seguridad.
 void	ft_strd_free(char **str);
-// (minishell)
+//
 char	**ft_strd_new(char *str);
-// (minishell)Añadimos un string a la ultima posicion del array bidimensional.
+//Añadimos un string a la ultima posicion del array bidimensional.
 char	**ft_strd_add(char **str, char *add);
-// (minishell) Borramos el ultimo array de un array bidimensional.
+// Borramos el ultimo array de un array bidimensional.
 char	**ft_strd_lastdel(char **str);
-// (minishell) Compara ambos string hasta que coincidan o alguno termine.
+// Compara ambos string hasta que coincidan o alguno termine.
 int		ft_strcmp(const char *s1, const char *s2);
-// (minishell) Igual que strdup pero le especificamos los que queremos copiar.
+// Igual que strdup pero le especificamos los que queremos copiar.
 char	*ft_strndup(const char *s1, int n);
-// (minishell) Introducimos un string dentro de otro en la posicion indicada.
+// Introducimos un string dentro de otro en la posicion indicada.
 char	*ft_insert_str(char *main, char *piece, size_t pos);
-// (minishell) Borramos de un string desde start hasta finish.
+// Borramos de un string desde start hasta finish.
 char	*ft_delete_str(char *main, size_t start, size_t finish);
-// (minishell) Comprobamos si un string contiene otro string.
+// Comprobamos si un string contiene otro string.
 char	*ft_strstr(const char *haystack, const char *needle);
 
 #endif
