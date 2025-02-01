@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkMap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 14:03:59 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/30 13:25:21 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/02/01 18:28:33 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,13 @@ int	ft_check_double(char **map)
 				map[i][j] == 'W')
 				count++;
 			if (count > 1)
-			{
-				ft_putstr_fd("Error\nMore than one player\n", 2);
-				return (1);
-			}
+				return (ft_putstr_fd("Error\nMore than one player\n", 2), 1);
 			j++;
 		}
 		i++;
 	}
+	if (count == 0)
+		return (ft_putstr_fd("Error\nNo player\n", 2), 1);
 	return (0);
 }
 

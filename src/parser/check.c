@@ -6,7 +6,7 @@
 /*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 13:00:25 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/30 15:35:43 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/02/01 19:35:51 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,28 +46,42 @@ int	ft_valid_elements(char **input)
 	count = 0;
 	while (input[i])
 	{
-		if (ft_strstr("NO", input[i]) == 0
-			|| ft_strstr("SO", input[i]) == 0
-			|| ft_strstr("WE", input[i]) == 0
-			|| ft_strstr("EA", input[i]) == 0
-			|| ft_strstr("F", input[i]) == 0
-			|| ft_strstr("C", input[i]) == 0)
+		if (ft_strstr(input[i], "NO ")
+			|| ft_strstr(input[i], "SO ")
+			|| ft_strstr(input[i], "WE ")
+			|| ft_strstr(input[i], "EA ")
+			|| ft_strstr(input[i], "F ")
+			|| ft_strstr(input[i], "C "))
 			count++;
 		else if (input[i][0] != '\n' && count != 6)
 		{
 			ft_putstr_fd("Error\nMissing elements\n", 2);
 			return (1);
 		}
+		if (count == 6)
+			return (0);
 		i++;
 	}
-	return (0);
+	ft_putstr_fd("Error\nMissing elements\n", 2);
+	return (1);
 }
 
 int	ft_is_valid_number(const char *str)
 {
 	int	num;
+	int	i;
 
-	num = atoi(str);
+	while (*str == ' ')
+		str++;
+	if (*str == '\0' || *str == '\n')
+		return (0);
+	i = 0;
+	while (str[i] && ft_isdigit(str[i]))
+		i++;
+	remove_non_printable((char *)str);
+	if (str[i] != '\0')
+		return (0);
+	num = ft_atoi(str);
 	return (num >= 0 && num <= 255);
 }
 
