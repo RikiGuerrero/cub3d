@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   parseUtils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 12:40:13 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/28 12:40:41 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:19:19 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,22 @@ void	ft_quit_newline(char **map)
 		}
 		i++;
 	}
+}
+
+int	get_max_width(char **map, int height)
+{
+	int	max_width;
+	int	i;
+	int	width;
+
+	max_width = 0;
+	i = 0;
+	while (i < height)
+	{
+		width = ft_strlen(map[i]);
+		if (width > max_width)
+			max_width = width;
+		i++;
+	}
+	return (max_width);
 }

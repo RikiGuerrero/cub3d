@@ -1,26 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_cub.c                                        :+:      :+:    :+:   */
+/*   parseCub.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 18:13:19 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/28 12:36:23 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:19:29 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	fill_map_rectangular(char **map, int height)
+{
+	int		max_width;
+	int		i;
+	int		width;
+	char	*new_row;
+
+	max_width = get_max_width(map, height);
+	i = 0;
+	while (i < height)
+	{
+		width = ft_strlen(map[i]);
+		if (width < max_width)
+		{
+			new_row = malloc(max_width + 1);
+			if (!new_row)
+				return ;
+			ft_memset(new_row, '1', max_width);
+			ft_memcpy(new_row, map[i], width);
+			new_row[max_width] = '\0';
+			free(map[i]);
+			map[i] = new_row;
+		}
+		i++;
+	}
+}
 
 void	ft_set_map(t_map *map)
 {
 	int	i;
 	int	j;
 
-	while (map->map[0][map->w_map] != '\0')
-		map->w_map++;
 	while (map->map[map->h_map] != NULL)
 		map->h_map++;
+	fill_map_rectangular(map->map, map->h_map);
+	while (map->map[0][map->w_map] != '\0')
+		map->w_map++;
 	i = -1;
 	while (++i < map->h_map)
 	{

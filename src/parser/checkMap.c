@@ -6,7 +6,7 @@
 /*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 14:03:59 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/02/01 18:28:33 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/02/02 15:57:59 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,9 @@ int	ft_check_map(char **map)
 {
 	if (ft_strange_chars(map) == 1)
 		return (1);
-	if (ft_check_unclosed(map) == 1)
-		return (1);
 	if (ft_check_walls(map) == 1)
+		return (1);
+	if (ft_check_unclosed(map) == 1)
 		return (1);
 	if (ft_check_double(map) == 1)
 		return (1);

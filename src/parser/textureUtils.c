@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textureUtils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:52:24 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/30 13:43:13 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/02/03 15:00:27 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,36 @@ char	*add_prefix(const char *prefix, const char *path)
 	return (full_path);
 }
 
+int	ft_check_texture_ext(char *path)
+{
+	if (ft_strcmp(path + ft_strlen(path) - 4, ".png") != 0)
+		return (1);
+	return (0);
+}
+
+int	ft_check_texture_file(char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (1);
+	close(fd);
+	return (0);
+}
+
 int	ft_check_textures(t_cub *cub)
 {
-	int fd;
-	
-	if (ft_strcmp(cub->config.no_texture_path + ft_strlen(cub->config.no_texture_path) - 4, ".png") != 0)
+	if (ft_check_texture_ext(cub->config.no_texture_path)
+		|| ft_check_texture_ext(cub->config.so_texture_path)
+		|| ft_check_texture_ext(cub->config.we_texture_path)
+		|| ft_check_texture_ext(cub->config.ea_texture_path))
 		return (1);
-	if (ft_strcmp(cub->config.so_texture_path + ft_strlen(cub->config.so_texture_path) - 4, ".png") != 0)
+	if (ft_check_texture_file(cub->config.no_texture_path)
+		|| ft_check_texture_file(cub->config.so_texture_path)
+		|| ft_check_texture_file(cub->config.we_texture_path)
+		|| ft_check_texture_file(cub->config.ea_texture_path))
 		return (1);
-	if (ft_strcmp(cub->config.we_texture_path + ft_strlen(cub->config.we_texture_path) - 4, ".png") != 0)
-		return (1);
-	if (ft_strcmp(cub->config.ea_texture_path + ft_strlen(cub->config.ea_texture_path) - 4, ".png") != 0)
-		return (1);
-	fd = open(cub->config.no_texture_path, O_RDONLY);
-	if (fd < 0)
-		return (1);
-	close(fd);
-	fd = open(cub->config.so_texture_path, O_RDONLY);
-	if (fd < 0)
-		return (1);
-	close(fd);
-	fd = open(cub->config.we_texture_path, O_RDONLY);
-	if (fd < 0)
-		return (1);
-	close(fd);
-	fd = open(cub->config.ea_texture_path, O_RDONLY);
-	if (fd < 0)
-		return (1);
-	close(fd);
 	return (0);
 }
 
