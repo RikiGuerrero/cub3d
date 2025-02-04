@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 17:02:53 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/30 15:38:11 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:18:49 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 void	ft_parse_texture(char *line, char **texture_path, int j)
 {
+	char	*tmp;
+
 	j += 2;
 	while (line[j] == ' ')
 		j++;
-	*texture_path = ft_strdup(&line[j]);
-	*texture_path = add_prefix("./", *texture_path);
+	tmp = ft_strdup(&line[j]);
+	*texture_path = add_prefix("./", tmp);
+	free(tmp);
 	remove_non_printable(*texture_path);
 }
 

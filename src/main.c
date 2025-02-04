@@ -6,22 +6,18 @@
 /*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:45:56 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/01/28 12:28:42 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:12:51 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_config(t_config *config)
+void	free_config(t_config config)
 {
-	free(config->no_texture_path);
-	free(config->so_texture_path);
-	free(config->we_texture_path);
-	free(config->ea_texture_path);
-	free(config->no_texture);
-	free(config->so_texture);
-	free(config->we_texture);
-	free(config->ea_texture);
+	free(config.no_texture_path);
+	free(config.so_texture_path);
+	free(config.we_texture_path);
+	free(config.ea_texture_path);
 }
 
 void	free_map(t_map *map)
@@ -36,7 +32,7 @@ void	free_map(t_map *map)
 
 void	free_cub(t_cub *cub)
 {
-	free_config(&cub->config);
+	free_config(cub->config);
 	if (cub->map->input)
 		free_map(cub->map);
 	free(cub->map);
