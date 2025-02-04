@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:28:04 by pjimenez          #+#    #+#             */
-/*   Updated: 2025/01/28 13:04:27 by pjimenez         ###   ########.fr       */
+/*   Updated: 2025/02/04 18:03:33 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,18 @@ mlx_texture_t	*get_texture(t_cub *mlx, int flag)
 
 double	get_texture_offset(mlx_texture_t *texture, t_cub *mlx)
 {
+	double	offset;
+
 	if (mlx->ray->flag == 1)
-		return (fmod(mlx->ray->hor_x, TILE_SIZE)
-			* (texture->width / TILE_SIZE));
+		offset = fmod(mlx->ray->hor_x, TILE_SIZE)
+			* (texture->width / TILE_SIZE);
 	else
-		return (fmod(mlx->ray->ver_y, TILE_SIZE)
-			* (texture->width / TILE_SIZE));
+		offset = fmod(mlx->ray->ver_y, TILE_SIZE)
+			* (texture->width / TILE_SIZE);
+	if ((mlx->ray->flag == 0 && mlx->ray->ray_ngl > M_PI / 2 && mlx->ray->ray_ngl < 3 * (M_PI / 2)) || 
+		(mlx->ray->flag == 1 && mlx->ray->ray_ngl > 0 && mlx->ray->ray_ngl < M_PI))
+			offset = texture->width - offset - 1;
+	return (offset);
 }
 
 void	draw_wall(t_cub *mlx, int t_pix, int b_pix, double wall_h)
@@ -93,6 +99,8 @@ void	render_wall(t_cub *mlx, int ray)
 
 	mlx->ray->distance *= cos(nor_angle(mlx->ray->ray_ngl
 				- mlx->ply->angle));
+	if (mlx->ray->distance < 0.1)
+		mlx->ray->distance = 0.1;
 	wall_h = (TILE_SIZE / mlx->ray->distance)
 		* ((S_W / 2) / tan(mlx->ply->fov_rd / 2));
 	b_pix = (S_H / 2) + (wall_h / 2);
