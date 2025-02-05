@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textureUtils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 19:52:24 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/02/03 15:00:27 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:02:45 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,20 @@ int	ft_check_texture_ext(char *path)
 
 int	ft_check_texture_file(char *path)
 {
-	int	fd;
+	int		fd;
+	uint8_t	buffer[8];
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 		return (1);
+	if (read(fd, buffer, 8) != 8)
+	{
+		close(fd);
+		return (1);
+	}
 	close(fd);
+	if (ft_memcmp(buffer, "\x89PNG\r\n\x1a\n", 8) != 0)
+		return (1);
 	return (0);
 }
 

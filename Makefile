@@ -1,7 +1,6 @@
 NAME        = cub3D
 
-CFLAGS      = -g -Wall -Wextra -Werror -fsanitize=address
-
+CFLAGS      = -Wall -Wextra -Werror -g
 MLX42_DIR   = ./MLX42
 MLX42_INC   = $(MLX42_DIR)/include
 MLX42_LIB   = $(MLX42_DIR)
