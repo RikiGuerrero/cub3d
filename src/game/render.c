@@ -6,7 +6,7 @@
 /*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 19:28:04 by pjimenez          #+#    #+#             */
-/*   Updated: 2025/02/04 18:03:33 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/02/04 20:06:02 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,11 @@ double	get_texture_offset(mlx_texture_t *texture, t_cub *mlx)
 	else
 		offset = fmod(mlx->ray->ver_y, TILE_SIZE)
 			* (texture->width / TILE_SIZE);
-	if ((mlx->ray->flag == 0 && mlx->ray->ray_ngl > M_PI / 2 && mlx->ray->ray_ngl < 3 * (M_PI / 2)) || 
-		(mlx->ray->flag == 1 && mlx->ray->ray_ngl > 0 && mlx->ray->ray_ngl < M_PI))
-			offset = texture->width - offset - 1;
+	if ((mlx->ray->flag == 0 && mlx->ray->ray_ngl > M_PI / 2
+			&& mlx->ray->ray_ngl < 3 * (M_PI / 2))
+		|| (mlx->ray->flag == 1 && mlx->ray->ray_ngl > 0
+			&& mlx->ray->ray_ngl < M_PI))
+		offset = texture->width - offset - 1;
 	return (offset);
 }
 
