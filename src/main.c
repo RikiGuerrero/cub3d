@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pjimenez <pjimenez@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:45:56 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/02/05 14:00:20 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/02/05 19:37:14 by pjimenez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,10 @@ void	ft_exit(t_cub *cub)
 	exit(0);
 }
 
-void ft_leaks_exit(void)
-{
-	system("leaks cub3D");
-}
-
 int	main(int ac, char **av)
 {
 	t_cub	cub;
 
-	//atexit(ft_leaks_exit);	
 	if (ac != 2 || ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".cub", 4))
 	{
 		ft_putstr_fd("Error\nInvalid arguments\n", 2);
