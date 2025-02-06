@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rguerrer <rguerrer@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 13:00:25 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/02/01 19:35:51 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:04:16 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,29 @@ int	ft_valid_elements(char **input)
 {
 	int	i;
 	int	count;
+	int	elements[6];
 
-	i = 0;
+	i = -1;
 	count = 0;
+	while (++i < 6)
+		elements[i] = 0;
+	i = 0;
 	while (input[i])
 	{
-		if (ft_strstr(input[i], "NO ")
-			|| ft_strstr(input[i], "SO ")
-			|| ft_strstr(input[i], "WE ")
-			|| ft_strstr(input[i], "EA ")
-			|| ft_strstr(input[i], "F ")
-			|| ft_strstr(input[i], "C "))
+		if (ft_check_elements(input[i], elements) == 0)
 			count++;
 		else if (input[i][0] != '\n' && count != 6)
-		{
-			ft_putstr_fd("Error\nMissing elements\n", 2);
-			return (1);
-		}
-		if (count == 6)
-			return (0);
+			break ;
 		i++;
 	}
-	ft_putstr_fd("Error\nMissing elements\n", 2);
-	return (1);
+	count = elements[0] + elements[1] + elements[2] + elements[3]
+		+ elements[4] + elements[5];
+	if (elements[0] > 1 || elements[1] > 1 || elements[2] > 1
+		|| elements[3] > 1 || elements[4] > 1 || elements[5] > 1)
+		return (ft_putstr_fd("Error\nDuplicate elements\n", 2), 1);
+	if (count != 6)
+		return (ft_putstr_fd("Error\nMissing elements\n", 2), 1);
+	return (0);
 }
 
 int	ft_is_valid_number(const char *str)

@@ -6,7 +6,7 @@
 /*   By: rguerrer <rguerrer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:52:01 by rguerrer          #+#    #+#             */
-/*   Updated: 2025/02/05 13:46:26 by rguerrer         ###   ########.fr       */
+/*   Updated: 2025/02/06 13:01:59 by rguerrer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void			ft_load_textures(t_cub *cub);
 void			ft_quit_newline(char **map);
 int				ft_check_textures(t_cub *cub);
 int				get_max_width(char **map, int height);
+int				ft_check_elements(char *input, int *elements);
 
 // Game
 void			mlx_key(mlx_key_data_t keydata, void *ml);
