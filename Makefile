@@ -1,6 +1,6 @@
 NAME        = cub3D
 
-CFLAGS      = -Wall -Wextra -Werror -g
+CFLAGS      = -Wall -Wextra -Werror -g -Iinc
 MLX42_DIR   = ./MLX42
 MLX42_INC   = $(MLX42_DIR)/include
 MLX42_LIB   = $(MLX42_DIR)
